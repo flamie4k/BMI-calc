@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator 101</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+    <h2>BMI Calculator</h2>
+    <h5> Not using any CSS here because CSS is gay</h5>
+    <br>
+    <div id="getdataform">
+        <form id="getdata">
+            <p> Enter your height (in meters): </p>
+            <input type="number" step="0.01" id="height" name="height" placeholder="0.00">
+            <p> Enter your weight (in kilograms): </p>
+            <input type="number" step="0.01" id="weight" name="weight" placeholder="0.00">
+            <br><br>
+            <input type="submit" name="submit" id="submit">
+        </form>
+    </div>
+    <div class="resultdiv">
+        <br>
+        <br>
+        <span id="result"></span>
+        <br>
+        <span id="conc"></span>
+    </div>
+
+    <script>
+        document.getElementById("getdata").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var h = parseFloat(document.getElementById("height").value);
+            var w = parseFloat(document.getElementById("weight").value);
+            var c = document.getElementById("conc");
+
+            if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
+                document.getElementById("result").innerHTML = "Please enter valid positive values for height and weight.";
+                return;
+            }
+
+            var BMI = w / (h * h);
+            document.getElementById("result").innerHTML = "Your BMI is: " + BMI.toFixed(2);
+
+            if (BMI <= 18.4) {
+                c.innerHTML = "Underweight.";
+            } else if (BMI >= 18.5 && BMI <= 24.9) {
+                c.innerHTML = "You're Normal.";
+            } else if (BMI >= 25.0 && BMI <= 39.9) {
+                c.innerHTML = "You're Overweight.";
+            } else if (BMI >= 40) {
+                c.innerHTML = "God damn, The second coming of mammoth";
+            } else {
+                c.innerHTML = "Wtf man, this ain't no joke.";
+            }
+        });
+    </script>
+</body>
+</html>
